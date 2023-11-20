@@ -1,0 +1,36 @@
+stages:
+    - deploy
+    - deploy_to_production
+
+dev:deploy:
+    image: alpine:latest
+    stage: deploy
+    only:
+        - develop
+    before_script:
+        - echo "setup ssh"
+        - apk add --no-cache openssh
+        - mkdir -p ~/.ssh
+        - echo "$dev_ssh_key" > ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    script:
+        - ssh $dev_ssh_user@$dev_ssh_host -p22 "/usr/bin/bash /home/deployer/development/deploy-service.sh service-admin"
+
+prod:deploy:
+    when: manual
+    image: alpine:latest
+    stage: deploy_to_production
+    only:
+        - production
+    before_script:
+        - apk add --no-cache openssh
+        - mkdir -p ~/.ssh
+        - echo "$prod_ssh_key" > ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    script:
+        - ssh $prod_ssh_user@$prod_ssh_host -p22 "/usr/bin/bash production/deploy-service.sh service-admin $CI_COMMIT_SHA"
+        - ssh $prod_ssh_user@$prod2_ssh_host -p22 "/usr/bin/bash production/deploy-service.sh service-admin $CI_COMMIT_SHA"

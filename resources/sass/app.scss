@@ -1,0 +1,45 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+// @import 'variables';
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+@import '~jquery-ui/themes/base/all.css';
+
+// @import "@fontsource/nunito";
+@import "@fontsource/poppins";
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+// @import 'admin-lte/dist/css/adminlte.css';
+@import 'select2/dist/css/select2.min.css';
+// @import 'datatables.net-dt/css/jquery.dataTables.min.css';
+@import 'izitoast/dist/css/iziToast.min.css';
+@import '~daterangepicker/daterangepicker.css';
+//Datatable
+// @import "~datatables.net-bs5/css/dataTables.bootstrap5.css";
+// @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+// @import 'datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css';
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.css";
+@import "~datatables.net-buttons-bs5/css/buttons.bootstrap5.css";
+// @import "datatables.net-buttons-bs5/css/buttons.bootstrap5.css";
+// @import "~datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css";
+// @import "~datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css";
+// @import "~datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css";
+// @import "~datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css";
+// @import "~datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css";
+// @import "~datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css";
+// @import "~datatables.net-select-bs5/css/select.bootstrap5.min.css";
+// @import "~datatables.net-datetime/dist/dataTables.dateTime.min.css";
+
+
+@import '../vendor/validation-engine/css/validationEngine.jquery.css';
+@import 'dropzone/dist/dropzone.css';
+
+@import 'custom.scss';
+@import 'chat';

@@ -1,0 +1,58 @@
+{
+        email sumarsono+acme@softwareseni.com
+}
+
+(security_header) {
+        header {
+                Content-Security-Policy "upgrade-insecure-requests"
+                #Strict-Transport-Security max-age=31536000;
+                X-Content-Type-Options "nosniff"
+                X-XSS-Protection "1; mode=block;"
+                X-Robots-Tag none
+                X-Frame-Options "SAMEORIGIN"
+                Referrer-Policy "no-referrer-when-downgrade"
+                # Permissions-Policy "accelerometer=(), autoplay=(), battery=(), camera=(), gyroscope=(), magnetometer=(), microphone=(), midi=();"
+                # Server name removing
+                -Server
+                -X-Powered-By
+        }
+}
+
+(laravel-app) {
+    {args.1} {
+        # Resolve the root directory for the app
+        root * {args.2}/public
+
+        # Provide Zstd and Gzip compression
+        encode zstd gzip
+
+        # Enable PHP-FPM 
+        php_fastcgi http://{args.0}:9000
+
+        # Allow caddy to serve static files
+        file_server
+        
+        # HTTP Header
+        import security_header
+
+        # Access Log
+        log {
+                output file /var/log/caddy/{args.1}.access.log {
+                        roll_keep 7
+                }
+        }
+
+        # Limit max upload size
+        request_body {
+                max_size 10MB
+        }
+
+    }
+}
+
+# Use the "laravel-app" snippet for our site
+# import laravel-app {args.0} {args.1} {args.2}
+# {args.0} = compose service name
+# {args.1} = subdomain
+# {args.0} = web root directory
+import laravel-app service-admin acc-service-admin.senisites.com /var/www/html/service-admin

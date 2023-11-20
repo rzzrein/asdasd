@@ -1,0 +1,4 @@
+[
+    "node_modules/flatpickr/dist/flatpickr.js",
+    "resources/vendor/metronic/core/js/vendors/plugins/flatpickr.init.js"
+]
